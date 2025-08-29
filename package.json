@@ -1,7 +1,8 @@
 {
   "name": "bfhl-api",
   "version": "1.0.0",
-  "dependencies": {
-    "express": "^4.19.2"
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js"
   }
 }

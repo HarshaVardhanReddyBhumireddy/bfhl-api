@@ -1,6 +1,6 @@
+// api/index.js
 export default function handler(req, res) {
   if (req.method === "GET") {
-    // GET /api
     return res.status(200).json({ operation_code: 1 });
   }
 
@@ -40,6 +40,5 @@ export default function handler(req, res) {
     }
   }
 
-  // If not GET or POST
   return res.status(405).json({ message: "Method Not Allowed" });
 }
