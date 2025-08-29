@@ -51,4 +51,6 @@ app.post("/bfhl", (req, res) => {
 });
 
 // ✅ Export for Vercel
-module.exports = app;
+module.exports = (req, res) => {
+  app(req, res);
+};
