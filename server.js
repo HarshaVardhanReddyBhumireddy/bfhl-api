@@ -1,46 +1,32 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
 
-// POST /bfhl
-app.post("/bfhl", (req, res) => {
-  const { data } = req.body;
-  if (!Array.isArray(data)) {
-    return res.status(400).json({ error: "Invalid input format" });
-  }
-
-  let numbers = [];
-  let alphabets = [];
-  let highestLowercase = null;
-
-  for (let item of data) {
-    if (/^\d+$/.test(item)) {
-      numbers.push(item);
-    } else if (/^[A-Za-z]$/.test(item)) {
-      alphabets.push(item.toUpperCase());
-      if (/[a-z]/.test(item)) {
-        if (!highestLowercase || item > highestLowercase) {
-          highestLowercase = item;
-        }
-      }
-    }
-  }
-
-  res.json({
-    is_success: true,
-    user_id: "harshavardhanreddybhumireddy_03032005",
-    email: "reddyharsha249@gmail.com",
-    roll_number: "22BCE20157",
-    numbers,
-    alphabets,
-    highest_lowercase_alphabet: highestLowercase ? [highestLowercase] : []
-  });
-});
-
-// GET /bfhl
-app.get("/bfhl", (req, res) => {
+// Routes
+app.get("/api/bfhl", (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.post("/api/bfhl", (req, res) => {
+  const data = req.body.data || [];
+  const user_id = "your_name_ddmmyyyy";
+  const email = "your_email@xyz.com";
+  const roll_number = "your_roll_number";
+
+  const numbers = data.filter((item) => !isNaN(item));
+  const alphabets = data.filter((item) => /^[a-zA-Z]$/.test(item));
+
+  res.json({
+    is_success: true,
+    user_id,
+    email,
+    roll_number,
+    numbers,
+    alphabets,
+    highest_alphabet: alphabets.sort().slice(-1),
+  });
+});
+// Export for Vercel
+module.exports = app;

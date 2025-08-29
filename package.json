@@ -2,10 +2,13 @@
   "name": "bfhl-api",
   "version": "1.0.0",
   "main": "server.js",
+  "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
   }
 }
