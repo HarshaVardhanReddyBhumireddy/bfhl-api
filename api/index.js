@@ -3,17 +3,17 @@ const app = express();
 
 app.use(express.json());
 
-// ✅ Root route (to avoid 404 on base URL)
+// Root route
 app.get("/", (req, res) => {
   res.send("✅ BFHL API is running! Use /bfhl (GET or POST).");
 });
 
-// ✅ GET /bfhl
+// GET /bfhl
 app.get("/bfhl", (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-// ✅ POST /bfhl
+// POST /bfhl
 app.post("/bfhl", (req, res) => {
   try {
     const data = req.body.data || [];
@@ -38,7 +38,7 @@ app.post("/bfhl", (req, res) => {
 
     res.json({
       is_success: true,
-      user_id: "harsha_b_123", // change to your format
+      user_id: "harsha_b_123",
       email: "your_email@example.com",
       roll_number: "YourRollNumber",
       numbers,
@@ -49,8 +49,7 @@ app.post("/bfhl", (req, res) => {
     res.status(400).json({ is_success: false, message: error.message });
   }
 });
-
-// ✅ Export for Vercel
+// ✅ Export handler for Vercel
 module.exports = (req, res) => {
   app(req, res);
 };
